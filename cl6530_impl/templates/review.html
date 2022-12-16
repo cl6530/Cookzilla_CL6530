@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .fit {
+                max-width: 20%;
+                max-height: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        {% if recipeID %}
+            <h1 style="color: green;">
+                Reviews for Recipe {{recipeID}}
+            </h1>
+        {% endif %}
+
+        {% if reviews %}
+            {% for review in reviews %}
+                <h2>{{review.revTitle}}</h2>
+                <p><strong>{{review.revDesc}}</strong></p>
+                <p><strong>Star rating: {{review.stars}}</strong></p>
+                {% for pic in review.pictures %}
+                    <img class="fit" src={{pic.pictureURL}}>
+                {% endfor %}
+                <p>Reviewer: {{review.userName}}</p>
+            {% endfor %}
+
+            <form action="/view_more_reviews" method="POST" >
+                <input type="text" name = "page" value={{page}} hidden />
+                <input type="text" name = "recipeID" value={{recipeID}} hidden />
+                <input type="userName" name = "userName" value={{userName}} hidden />
+                <input type="submit" value = "More reviews" />
+            </form>
+        {% else %}
+            <h2>No more reviews!</h2>
+        {% endif %}
+
+        <form action="/view_recipe" method="POST" >
+            <input type="text" name = "recipeID" value={{recipeID}} hidden />
+            <input type="submit" value = "Back to recipe" />
+        </form>
+
+        <a href="/home">home</a>
+    </body>
+</html>

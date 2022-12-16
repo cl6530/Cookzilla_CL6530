@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Search Results
+		</h1>
+
+        {% for message in messages %}
+            <h2 style="color: red;">
+                {{message}}
+            </h2>
+        {% endfor %}
+
+        {% for result in results %}
+            <h2 style="color: blue;">
+                {{result.title}}
+            </h2>
+            <p>author: {{result.postedBy}}</p>
+            <form action="/view_recipe" method="POST" >
+                <input type="text" name = "recipeID" value={{result.recipeID}} hidden /> </br>
+                <input type="submit" value = View />
+            </form>
+        {% endfor %}
+
+        <a href="/home">home</a>
+
+        <script>
+
+        </script>
+
+    </body>
+</html>

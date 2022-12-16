@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .imgbox {
+                display: grid;
+                height: 100%;
+            }
+            .fit {
+                max-width: 20%;
+                max-height: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Group Member RSVPed
+		</h1>
+
+        <h2 style="color: blue;">
+            Event ID: {{eID}}
+        </h2>
+
+        <h3 style="color: blue;">
+            Description
+        </h3>
+        <p><strong>Description: {{eDesc}}</strong></p>
+
+        <h3 style="color: blue;">
+            Date
+        </h3>
+        <p><strong>Description: {{eDate}}</strong></p>
+
+        <h3 style="color: blue;">
+            RSVPed Members
+        </h3>
+        {% for result in results %}
+            <p>Member: {{result.userName}} Response: {{result.response}}</p>
+        {% endfor %}
+
+        <h2 style="color: blue;">
+			Pictures
+		</h2>
+        {% for picture in pictures %}
+            <img class="fit" src={{picture.pictureURL}}>
+        {% endfor %}
+        <br>
+
+        <form id="eventPictures" action="/add_EventPic" method="POST">
+            <input type="text" name = "eID" value={{eID}} hidden/> </br>
+            <input type="text" name = "eDesc" value={{eDesc}} hidden/> </br>
+            <input type="text" name = "eDate" value={{eDate}} hidden/> </br>
+            <input type="text" name = "gName" value={{gName}} hidden/> </br>
+            <input type="text" name = "gCreator" value={{gCreator}} hidden/> </br>
+			<input type="text" name = "picture" placeholder="Picture URL" required/> </br>
+            <input type="submit" value = "Add Picture" />
+		</form>
+
+        <a href="/event_info?eID={{eID}}&eDesc={{eDesc}}&eDate={{eDate}}&gName={{gName}}&gCreator={{gCreator}}" >Back to event info</a>
+        <br>
+        <a href="/home">home</a>
+
+    </body>
+</html>

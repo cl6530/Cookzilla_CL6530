@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Search Event Results
+		</h1>
+
+        {% for message in messages %}
+            <h2 style="color: red;">
+                {{message}}
+            </h2>
+        {% endfor %}
+
+        {% for result in results %}
+            <h2 style="color: blue;">
+                Event ID: {{result.eID}}
+            </h2>
+            <h2 style="color: blue;">
+                Event Name: {{result.eName}}
+            </h2>
+            <p><strong>Description: {{result.eDesc}}</strong></p>
+            <p><strong>Date: {{result.eDate}}</strong></p>
+            <p><strong>Group Name: {{result.gName}}</strong></p>
+            <p><strong>Group Creater: {{result.gCreator}}</strong></p>
+
+            <form action="/view_event" method="POST" >
+                <input type="text" name = "eID" value={{result.eID}} hidden/>
+                <input type="text" name = "eDesc" value={{result.eDesc}} hidden/>
+                <input type="text" name = "eDate" value={{result.eDate}} hidden/>
+                <input type="text" name = "gName" value={{result.gName}} hidden/>
+                <input type="text" name = "gCreator" value={{result.gCreator}} hidden/> 
+                <input hidden type="text" name = "gDesc" value={{result.gDesc}} /> </br>
+                <input type="submit" value = "View"/>
+            </form>
+        {% endfor %}
+
+        <a href="/home">home</a>
+
+        <script>
+
+        </script>
+
+    </body>
+</html>

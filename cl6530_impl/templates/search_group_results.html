@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Search Group Results
+		</h1>
+
+        {% for message in messages %}
+            <h2 style="color: red;">
+                {{message}}
+            </h2>
+        {% endfor %}
+
+        {% for result in results %}
+            <h2 style="color: blue;">
+                {{result.gName}}
+            </h2>
+            <p><strong>Creater: {{result.gCreator}}</strong></p>
+            <p><strong>Description: {{result.gDesc}}</strong></p>
+            <form action="/view_group" method="POST" >
+                <input type="text" name = "gName" value={{result.gName}} hidden />
+                <input type="text" name = "gCreator" value={{result.gCreator}} hidden /> 
+                <input type="text" name = "gDesc" value={{result.gDesc}} hidden /> </br>
+                <input type="submit" value = View />
+            </form>
+        {% endfor %}
+
+        <a href="/home">home</a>
+
+        <script>
+
+        </script>
+
+    </body>
+</html>

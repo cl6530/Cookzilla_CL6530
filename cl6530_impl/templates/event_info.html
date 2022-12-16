@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Event Info
+		</h1>
+
+        <h2 style="color: blue;">
+            Event ID: {{eID}}
+        </h2>
+
+        <h3 style="color: blue;">
+            Description
+        </h3>
+        <p><strong>Description: {{eDesc}}</strong></p>
+
+        <h3 style="color: blue;">
+            Date
+        </h3>
+        <p><strong>Description: {{eDate}}</strong></p>
+
+        <h3 style="color: blue;">
+            Group Name
+        </h3>
+        <p><strong>Name: {{gName}}</strong></p>
+
+        <h3 style="color: blue;">
+            Group Creater
+        </h3>
+        <p><strong>Creater: {{gCreator}}</strong></p>
+
+        <a href="/event_rsvp?eID={{eID}}&eDesc={{eDesc}}&eDate={{eDate}}&gName={{gName}}&gCreator={{gCreator}}" >List of member RSVPed</a>
+        <br>
+
+        {% if member %}
+            {% if rsvp %}
+                <h2 style="color: green;">
+                    RSVP event
+                </h2>
+                <form action="/rsvp_event" method="POST">
+                    <input type="text" name = "eID" value={{eID}} hidden />
+                    <input type="text" name = "eDesc" value={{eDesc}} hidden />
+                    <input type="text" name = "eDate" value={{eDate}} hidden />
+                    <input type="text" name = "gName" value={{gName}} hidden />
+                    <input type="text" name = "gCreator" value={{gCreator}} hidden />
+                    <input type="text" name = "response" placeholder="Y/N" required /> </br>
+                    <input type="submit" value = RSVP />
+                </form>
+            {% else %}
+                <p><strong>You have RSVPed!</strong></p>
+            {% endif %}
+        {% endif %}
+
+        <a href="/home">home</a>
+
+    </body>
+</html>

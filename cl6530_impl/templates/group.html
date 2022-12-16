@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+		<h1 style="color: peru;">
+			Manage Groups
+		</h1>
+
+		<h2 style="color: green;">
+			Search Groups
+		</h2>
+		<form action="/search_group" method="POST">
+            <input type="text" name = "group" placeholder="group name" /> </br>
+			<input type="text" name = "creater" placeholder="creater" /> </br>
+            <input type="text" name = "description" placeholder="description" /> </br>
+            <input type="submit" value = Search />
+        </form>
+
+        <h2 style="color: green;">
+			Search Events
+		</h2>
+		<form action="/search_event" method="POST">
+            <input type="text" name = "eID" placeholder="event ID" /> </br>
+            <input type="text" name = "group" placeholder="group name" /> </br>
+			<input type="text" name = "creater" placeholder="creater" /> </br>
+            <input type="text" name = "member" placeholder="people who participate" /> </br>
+            <select id="valid" name="valid" required>
+                <option value="0">All events</option>
+                <option value="1">Future events only</option>
+            </select> </br>
+            <input type="submit" value = Search />
+        </form>
+
+        <h2 style="color: green;">
+			Create Group
+		</h2>
+		<form action="/create_group" method="POST">
+            <input type="text" name = "group" placeholder="group name" /> </br>
+            <input type="text" name = "description" placeholder="description" /> </br>
+            <input type="submit" value = Create />
+        </form>
+        <br>
+
+        <a href="/search_group?joined=0" >Owned Groups</a>
+        <br>
+
+        <a href="/search_group?joined=1" >Joined Groups</a>
+        <br>
+
+        <a href="/search_event" >RSVPed events</a>
+        <br>
+
+        <a href="/home">home</a>
+
+    </body>
+</html>

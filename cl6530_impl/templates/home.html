@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+		<h1 style="color: orange;">
+			Welcome {{username}}
+		</h1>
+
+        {% if error %}
+		<p class="error"><strong>Error:</strong> {{error}}</p>
+	    {% endif %}
+
+		<h2 style="color: green;">
+			Go to Recipe by ID
+		</h2>
+		<form action="/view_recipe" method="POST">
+            <input type="text" name = "recipeID" placeholder="recipeID" /> </br>
+            <input type="submit" value = Go />
+        </form>
+
+		<h2 style="color: green;">
+			Search Recipes
+		</h2>
+		<form action="/search" method="POST">
+            <input type="text" name = "keyword" placeholder="keyword" /> </br>
+			<input type="text" name = "tag" placeholder="tag" /> </br>
+			<input type="text" name = "author" placeholder="author" /> </br>
+			<input type="text" name = "reviewer" placeholder="reviewer" /> </br>
+			<input type="text" name = "star" placeholder="star" /> </br>
+            <input type="submit" value = Search />
+        </form>
+
+		</br>
+
+        <style type="text/css">
+            table, th, td{
+                border: 1px solid black;
+            }
+        </style>
+
+        <table hidden>
+            <th>Time</th>
+            <th>Post</th>
+
+        {% for line in posts %}
+            <tr>
+                <td>{{line.ts}}</td>
+                <td>{{line.blog_post}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+
+		<a href="/search?userName={{username}}">Manage your recipes</a>
+        <br>
+        <a href="/recipe">Post a recipe</a>
+        <br>
+		<a href="/group">Manage groups and events</a>
+        <br>
+        <a href="/logout">Logout</a>
+
+		<br>
+
+		{% for message in messages %}
+            <h2 style="color: red;">
+                {{message}}
+            </h2>
+        {% endfor %}
+
+        {% for result in results %}
+            <h2 style="color: blue;">
+                {{result.title}}
+            </h2>
+            <p>author: {{result.postedBy}}</p>
+            <form action="/view_recipe" method="POST" >
+                <input type="text" name = "recipeID" value={{result.recipeID}} hidden /> </br>
+                <input type="submit" value = View />
+            </form>
+        {% endfor %}
+
+        <a href="/home">home</a>
+
+    </body>
+</html>

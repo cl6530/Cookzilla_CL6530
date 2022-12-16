@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Group Info
+		</h1>
+
+        <h2 style="color: blue;">
+            {{gName}}
+        </h2>
+
+        <h3 style="color: blue;">
+            Creater
+        </h3>
+        <p><strong>Creater: {{gCreator}}</strong></p>
+
+        <h3 style="color: blue;">
+            Description
+        </h3>
+        <p><strong>Description: {{gDesc}}</strong></p>
+
+        <a href="/group_member?gName={{gName}}&gCreator={{gCreator}}&gDesc={{gDesc}}" >Get list of group members</a>
+        <br>
+        <a href="/search_event?gName={{gName}}&gCreator={{gCreator}}" >Show group events</a>
+        <br>
+
+        {% if need_to_join %}
+            <h2 style="color: green;">
+                Join group
+            </h2>
+            <form action="/join_group" method="POST">
+                <input type="text" name = "gName" value={{gName}} hidden />
+                <input type="text" name = "gDesc" value={{gDesc}} hidden />
+                <input hidden type="text" name = "gCreator" value={{gCreator}} /> </br>
+                <input type="submit" value = Join />
+            </form>
+        {% else %} 
+            <p><strong>You have joined group!</strong></p>
+            <h2 style="color: green;">
+                Create Event
+            </h2>
+            <form action="/create_event" method="POST">
+                <input type="text" name = "gName" value={{gName}} hidden />
+                <input type="text" name = "gCreator" value={{gCreator}} hidden />
+                <input type="text" name = "eName" placeholder="Event Name" /> </br>
+                <input type="text" name = "eDesc" placeholder="Event Description" /> </br>
+                <input type="text" name = "eDate" placeholder="YYYY-MM-DD HH:MM:SS" /> </br>
+                <input type="submit" value = Create />
+            </form>
+        {% endif %}
+
+        <a href="/home">home</a>
+
+    </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .imgbox {
+                display: grid;
+                height: 100%;
+            }
+            .fit {
+                max-width: 20%;
+                max-height: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Recipe Details
+		</h1>
+        <br>
+
+        {% if recipeID %}
+            <h2>RecipeID: {{recipeID}}</h2>
+        {% endif %}
+        <br>
+
+        {% if author %}
+            <p><strong>Author: {{author}}</strong></p>
+        {% endif %}
+        <br>
+
+        <h2 style="color: blue;">
+			Title
+		</h2>
+        {% if title %}
+            <p><strong>{{title}}</strong></p>
+        {% endif %}
+        <br>
+
+        <h2 style="color: blue;">
+			Number of servings
+		</h2>
+        {% if title %}
+            <p><strong>{{numServings}}</strong></p>
+        {% endif %}
+        <br>
+
+        <h2 style="color: blue;">
+			Ingredients
+		</h2>
+        {% for ingredient in ingredients %}
+            <p>{{ingredient}}</p>
+        {% endfor %}
+        <br>
+
+        <h2 style="color: blue;">
+			Steps
+		</h2>
+        {% for step in steps %}
+            <p>{{step}}</p>
+        {% endfor %}
+        <br>
+
+        <h2 style="color: blue;">
+			Tags
+		</h2>
+        {% for tag in tags %}
+            <p>{{tag}}</p>
+        {% endfor %}
+        <br>
+
+        <h2 style="color: blue;">
+			Pictures
+		</h2>
+        {% for picture in pictures %}
+            <img class="fit" src={{picture}}>
+        {% endfor %}
+        <br>
+
+        <h2 style="color: blue;">
+			Your review
+		</h2>
+        {% if revTitle %}
+            <h3>{{revTitle}}</h3>
+            <p>{{revDesc}}</p>
+            <p>Star rating: {{stars}}</p>
+            {% for revPic in revPics %}
+                <img class="fit" src={{revPic}}>
+            {% endfor %}
+        {% else %}
+            <h3>You haven't reviewed this recipe.</h3>
+        {% endif %}
+        <br>
+
+        <form id="addReview" action="/add_review" method="POST">
+            <h1>Add or update review</h1> 
+            {% if revTitle %}
+                <input type="text" name = "revTitle" value={{revTitle}} hidden />
+            {% else %}
+                <input type="text" name = "revTitle" value="" hidden />
+            {% endif %}
+            <input type="text" name = "recipeID" value={{recipeID}} hidden />
+            <input type="text" name = "title" placeholder="title" required/> </br>
+            <input type="text" name = "review" placeholder="review" required/> </br>
+            <select id="star" name="star" required>
+                <option value="1">1 Star</option>
+                <option value="2">2 Star</option>
+                <option value="3">3 Star</option>
+                <option value="4">4 Star</option>
+                <option value="5">5 Star</option>
+            </select> </br>
+        </form>
+
+        <button onClick="add_picture()">
+			add picture
+		</button>
+        <br>
+
+        <br>
+        {% if recipeID %}
+            <a href="/review?page=1&recipeID={{recipeID}}">View reviews</a>
+            <br>
+        {% endif %}
+
+        <a href="/home">home</a>
+
+        <script>
+            // Create a break line element
+			var br = document.createElement("br");
+
+            // Get form
+			var form = document.getElementById("addReview");
+			var submit = document.createElement("input");
+			submit.setAttribute("type", "submit");
+			submit.setAttribute("value", "Add");
+			form.appendChild(submit);
+
+            function add_picture() {
+                // Create an input element for picture
+				var picture = document.createElement("input");
+				picture.setAttribute("type", "text");
+				picture.setAttribute("name", "picture");
+				picture.setAttribute("placeholder", "Picture URL");
+				
+				form.removeChild(submit);
+				form.appendChild(picture);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+            }
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>
+			Create forms for recipe by Javascript
+		</title>
+	</head>
+	<body style="text-align: center;">
+		<h1 style="color: green;">
+			Add New Recipe
+		</h1>
+		<form id="recipeForm" action="/recipeAdd" method="POST">
+			<input type="text" name = "title" placeholder="title" required/> </br>
+			<input type="text" name = "numServings" placeholder="numServings" required/> </br>
+		</form>
+		<button onClick="add_ingredient()">
+			add ingredient
+		</button>
+		<button onClick="add_step()">
+			add step
+		</button>
+		<button onClick="add_tag()">
+			add tag
+		</button>
+		<button onClick="add_related_recipe()">
+			add related recipe
+		</button>
+		<button onClick="add_picture()">
+			add picture
+		</button>
+
+		<select id="unitDropdown" name="unit" hidden="hidden">
+			{% for unit in units %}
+				<option value={{unit}}>{{unit}}</option>
+			{% endfor %}
+		</select>
+
+		<a href="/home">home</a>
+
+		<script>
+			// Create a break line element
+			var br = document.createElement("br");
+
+			// Get form
+			var form = document.getElementById("recipeForm");
+			var submit = document.createElement("input");
+			submit.setAttribute("type", "submit");
+			submit.setAttribute("value", "Add Recipe");
+			form.appendChild(submit);
+
+			var unitDropdown = document.getElementById("unitDropdown");
+
+			// Get unit drop down
+			var unit_dropdown = document.getElementById("unitDropdown");
+
+			function add_ingredient() {
+				// Create input elements for ingredient
+				var ingredient = document.createElement("input");
+				ingredient.setAttribute("type", "text");
+				ingredient.setAttribute("name", "ingredient");
+				ingredient.setAttribute("placeholder", "ingredient");
+
+				var amount = document.createElement("input");
+				amount.setAttribute("type", "text");
+				amount.setAttribute("name", "amount");
+				amount.setAttribute("placeholder", "amount");
+
+				//var unit = document.createElement("input");
+				//unit.setAttribute("type", "text");
+				//unit.setAttribute("name", "unit");
+				//unit.setAttribute("placeholder", "unit");
+				var unit = unit_dropdown.cloneNode(true);
+				unit.setAttribute("name", "unit");
+				unit.hidden = false;
+
+				var link = document.createElement("input");
+				link.setAttribute("type", "text");
+				link.setAttribute("name", "link");
+				link.setAttribute("placeholder", "link");
+				
+				form.removeChild(submit);
+				form.appendChild(ingredient);
+				form.appendChild(br.cloneNode());
+				form.appendChild(amount);
+				form.appendChild(br.cloneNode());
+				form.appendChild(unit);
+				form.appendChild(br.cloneNode());
+				form.appendChild(link);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+			}
+
+			function add_step() {
+				// Create an input element for step
+				var step = document.createElement("input");
+				step.setAttribute("type", "text");
+				step.setAttribute("name", "step");
+				step.setAttribute("placeholder", "step");
+				
+				form.removeChild(submit);
+				form.appendChild(step);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+			}
+
+			function add_tag() {
+				// Create an input element for tag
+				var tag = document.createElement("input");
+				tag.setAttribute("type", "text");
+				tag.setAttribute("name", "tag");
+				tag.setAttribute("placeholder", "tag");
+				
+				form.removeChild(submit);
+				form.appendChild(tag);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+			}
+
+			function add_related_recipe() {
+				// Create an input element for relatedRecipe
+				var relatedRecipe = document.createElement("input");
+				relatedRecipe.setAttribute("type", "text");
+				relatedRecipe.setAttribute("name", "relatedRecipe");
+				relatedRecipe.setAttribute("placeholder", "relatedRecipe");
+				
+				form.removeChild(submit);
+				form.appendChild(relatedRecipe);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+			}
+
+			function add_picture() {
+				// Create an input element for picture
+				var picture = document.createElement("input");
+				picture.setAttribute("type", "text");
+				picture.setAttribute("name", "picture");
+				picture.setAttribute("placeholder", "Picture URL");
+				
+				form.removeChild(submit);
+				form.appendChild(picture);
+				form.appendChild(br.cloneNode());
+				form.appendChild(submit);
+			}
+		</script>
+	</body>
+</html>

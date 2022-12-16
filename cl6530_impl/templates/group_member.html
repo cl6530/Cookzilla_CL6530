@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1 style="color: green;">
+			Group Meber List
+		</h1>
+
+        <h2 style="color: blue;">
+            {{gName}}
+        </h2>
+
+        <h3 style="color: blue;">
+            Creater
+        </h3>
+        <p><strong>Creater: {{gCreator}}</strong></p>
+
+        <h3 style="color: blue;">
+            Description
+        </h3>
+        <p><strong>Description: {{gDesc}}</strong></p>
+
+        <h3 style="color: blue;">
+            Members
+        </h3>
+        {% for user in user_list %}
+            <p>{{user.memberName}}</p>
+        {% endfor %}
+
+        <a href="/group_info?gName={{gName}}&gCreator={{gCreator}}&gDesc={{gDesc}}" >Back to group info</a>
+        <br>
+
+        <a href="/home">home</a>
+
+    </body>
+</html>
